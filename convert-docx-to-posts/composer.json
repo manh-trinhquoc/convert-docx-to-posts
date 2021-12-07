@@ -1,0 +1,47 @@
+{
+    "name": "trinh-quoc-manh/convert-docx-to-posts",
+    "type": "wordpress-plugin",
+    "description": "Wordpress Plugin Boilerplate with steroids!",
+    "homepage": "https:\/\/github.com\/WPBP\/WordPress-Plugin-Boilerplate-Powered",
+    "license": "GPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Trinh Quoc manh",
+            "email": "trinhquocmanh1990@gmail.com",
+            "homepage": ""
+        }
+    ],
+    "require": {
+        "php": ">=7.0",
+        "ayecode\/wp-super-duper": "^1.0",
+        "cmb2\/cmb2": "2.9.*",
+        "composer\/installers": "1.x",
+        "decodelabs\/tagged": "^0.11.9",
+        "inpsyde\/wp-context": "1.3.*",
+        "origgami\/cmb2-grid": "dev-master"
+    },
+    "require-dev": {
+        "ergebnis\/composer-normalize": "^2.6"
+    },
+    "extra": {
+        "installer-paths": {
+            "vendor\/{$name}\/": [
+                "cmb2\/cmb2",
+                "origgami\/cmb2-grid"
+            ]
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Convert_Docx_To_Posts\\Backend\\": "backend\/",
+            "Convert_Docx_To_Posts\\Rest\\": "rest\/",
+            "Convert_Docx_To_Posts\\Ajax\\": "ajax\/",
+            "Convert_Docx_To_Posts\\Internals\\": "internals\/",
+            "Convert_Docx_To_Posts\\Cli\\": "cli\/",
+            "Convert_Docx_To_Posts\\Integrations\\": "integrations\/",
+            "Convert_Docx_To_Posts\\Engine\\": "engine\/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
