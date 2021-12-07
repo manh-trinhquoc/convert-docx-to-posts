@@ -25,7 +25,7 @@
     "settings-css": "true",
     "admin-page": "true"
   },
-  "ajax": "true",
+  "ajax": "false",
   "git-repo": "false",
   "grunt": "false",
   "grumphp": "false",

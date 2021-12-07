@@ -11,9 +11,10 @@
     }],
     "require": {
         "php": ">=7.0",
+        "ayecode/wp-super-duper": "dev-master",
         "cmb2/cmb2": "2.9.*",
         "composer/installers": "1.x",
-        "inpsyde/wp-context": "dev-master",
+        "inpsyde/wp-context": "dev-main",
         "origgami/cmb2-grid": "dev-master",
         "phpoffice/phpword": "^0.18.2"
     },
