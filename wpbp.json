@@ -1,0 +1,52 @@
+{
+  "plugin": {
+    "name": "Convert Docx To Post",
+    "version": "1.0.0"
+  },
+  "author": {
+    "name": "Trinh Quoc manh",
+    "email": "trinhquocmanh1990@gmail.com",
+    "url": "",
+    "license": "GPL 2.0+",
+    "copyright": "2020"
+  },
+  "public-assets": {
+    "js": "false",
+    "css": "false"
+  },
+  "act-deact": {
+    "actdeact": "false",
+    "uninstall": "false"
+  },
+  "admin-assets": {
+    "admin-js": "true",
+    "admin-css": "true",
+    "settings-js": "true",
+    "settings-css": "true",
+    "admin-page": "true"
+  },
+  "ajax": "true",
+  "git-repo": "false",
+  "grunt": "false",
+  "grumphp": "false",
+  "phpstan": "false",
+  "phpcs": "false",
+  "phpmd": "false",
+  "unit-test": "false",
+  "wpcli": "false",
+  "language-files": "false",
+  "libraries": [
+    "origgami/cmb2-grid",
+    "cmb2/cmb2",
+    "phpoffice/phpword"
+  ],
+  "snippet": {
+    "backend": [
+      "donate-link-plugin-list"
+    ],
+    "frontend": [
+      "template-system"
+    ],
+    "system": []
+  }
+}
