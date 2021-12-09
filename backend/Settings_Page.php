@@ -99,7 +99,8 @@ class Settings_Page extends Base
         foreach ($postArr as $postInfo) {
             $post = array(
                 'post_title' => $postInfo['title'],
-                // 'post_status' => 'publish',
+                'post_name' => sanitize_title($postInfo['title']),
+                'post_status' => 'pending',
                 'post_content' => $postInfo['content']
             );
             $new_post = wp_insert_post($post);
