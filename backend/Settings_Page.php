@@ -38,6 +38,7 @@ class Settings_Page extends Base
         $realpath        = (string) \realpath(\dirname(__FILE__));
         $plugin_basename = \plugin_basename(\plugin_dir_path($realpath) . CDTP_TEXTDOMAIN . '.php');
         \add_filter('plugin_action_links_' . $plugin_basename, array( $this, 'add_action_links' ));
+
         // var_dump($this->settings);
         if (
             isset($_GET['page']) &&
@@ -55,21 +56,41 @@ class Settings_Page extends Base
             $attachment_id = \attachment_url_to_postid($field);
             if (is_int($attachment_id) && $attachment_id > 0) {
                 $file_path = \get_attached_file($attachment_id);
+                if (!$this->validateExt($file_path)) {
+                    return;
+                }
                 $htmlContent = $this->getHmltContentFromDocx($file_path);
                 $postArr = $this->convertHtmlToPostArr($htmlContent);
                 $count = $this->createPosts($postArr);
+                if ($count > 0) {
+                    $this->deleteFile($attachment_id);
+                    $this->postCreated = $count;
+                }
             }
-            // var_dump($count);
-            // var_dump($postArr);
         }
-        $option = $this->clearOption();
-        // var_dump($option);
     }
 
-    protected function clearOption(): array
+    protected $postCreated = 0;
+    protected $error = '';
+
+    protected function validateExt(string $file_path): bool
     {
-        \update_option(CDTP_TEXTDOMAIN . '-settings', [], false);
-        return \cdtp_get_settings();
+        // var_dump($file_path);
+        $valid = true;
+        $extension = pathinfo($file_path, PATHINFO_EXTENSION);
+        if ($extension != 'docx') {
+            $valid = false;
+            $this->error = 'File có định dạng không phù hợp: ' . $extension . '. Chỉ chấp nhận file docx';
+        }
+        return $valid;
+    }
+
+    protected function deleteFile($postId)
+    {
+        \wp_delete_attachment($postId, true);
+        $field_key = '_file_docx';
+        $_POST[$field_key] = '';
+        unset($_POST['_file_docx_id']);
     }
 
     protected function createPosts(array $postArr): int

@@ -263,5 +263,14 @@
 
         cmb2_metabox_form(CDTP_TEXTDOMAIN . '_options', CDTP_TEXTDOMAIN . '-settings');
     ?>
+    <div>
+        <h3>Đã tạo
+            <?php echo $this->postCreated ?>
+            bài viết
+        </h3>
+        <h3>
+            <?php echo $this->error ?>
+        </h3>
+    </div>
 
 </div>
