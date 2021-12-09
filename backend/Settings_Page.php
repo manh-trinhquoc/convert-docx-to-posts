@@ -38,8 +38,7 @@ class Settings_Page extends Base
         $realpath        = (string) \realpath(\dirname(__FILE__));
         $plugin_basename = \plugin_basename(\plugin_dir_path($realpath) . CDTP_TEXTDOMAIN . '.php');
         \add_filter('plugin_action_links_' . $plugin_basename, array( $this, 'add_action_links' ));
-
-
+        // var_dump($this->settings);
         if (
             isset($_GET['page']) &&
             $_GET['page'] == CDTP_TEXTDOMAIN &&
@@ -51,14 +50,45 @@ class Settings_Page extends Base
             if (!$verified) {
                 return;
             }
-            // var_dump($this->settings);
-            $field_key = '_file_docx_id';
-            $field = $this->settings[$field_key];
-            $file_path = \get_attached_file($field);
-            $htmlContent = $this->getHmltContentFromDocx($file_path);
-            $postArr = $this->convertHtmlToPostArr($htmlContent);
+            $field_key = '_file_docx';
+            $field = $_POST[$field_key];
+            $attachment_id = \attachment_url_to_postid($field);
+            if (is_int($attachment_id) && $attachment_id > 0) {
+                $file_path = \get_attached_file($attachment_id);
+                $htmlContent = $this->getHmltContentFromDocx($file_path);
+                $postArr = $this->convertHtmlToPostArr($htmlContent);
+                $count = $this->createPosts($postArr);
+            }
+            // var_dump($count);
             // var_dump($postArr);
         }
+        $option = $this->clearOption();
+        // var_dump($option);
+    }
+
+    protected function clearOption(): array
+    {
+        \update_option(CDTP_TEXTDOMAIN . '-settings', [], false);
+        return \cdtp_get_settings();
+    }
+
+    protected function createPosts(array $postArr): int
+    {
+        $count = 0;
+        foreach ($postArr as $postInfo) {
+            $post = array(
+                'post_title' => $postInfo['title'],
+                // 'post_status' => 'publish',
+                'post_content' => $postInfo['content']
+            );
+            $new_post = wp_insert_post($post);
+            if (!is_wp_error($new_post)) {
+                $count ++;
+                wp_publish_post($new_post);
+                // var_dump($new_post);
+            }
+        }
+        return $count;
     }
 
     protected function getHmltContentFromDocx(string $filePath): string
