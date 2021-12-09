@@ -30,7 +30,9 @@ class Settings_Page extends Base
         if (!parent::initialize()) {
             return;
         }
+        var_dump($this->settings);
 
+        // var_dump(debug_backtrace());
         // Add the options page and menu item.
         \add_action('admin_menu', array( $this, 'add_plugin_admin_menu' ));
 

@@ -34,17 +34,6 @@ define('CDTP_PLUGIN_ABSOLUTE', __FILE__);
 define('CDTP_MIN_PHP_VERSION', '7.0');
 define('CDTP_WP_VERSION', '5.3');
 
-// xác định xem có dùng symlink không
-$file = __FILE__;
-global $is_symlink;
-$is_symlink = false;
-if (strpos($file, 'plugins\convert-docx-to-posts') == false &&
-    strpos($file, 'convert-docx-to-posts\convert-docx-to-posts') !== false) {
-    $is_symlink = true;
-}
-// var_dump($file);
-// var_dump(strpos($file, 'plugins\convert-docx-to-posts'));
-// var_dump($is_symlink);
 
 if (version_compare(PHP_VERSION, CDTP_MIN_PHP_VERSION, '<=')) {
     add_action(

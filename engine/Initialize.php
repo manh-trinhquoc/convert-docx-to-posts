@@ -58,7 +58,6 @@ class Initialize
             $this->get_classes('Ajax');
         }
 
-
         if ($this->content->request('backend')) {
             $this->get_classes('Backend');
         }
