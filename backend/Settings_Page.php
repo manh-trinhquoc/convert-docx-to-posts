@@ -30,7 +30,6 @@ class Settings_Page extends Base
         if (!parent::initialize()) {
             return;
         }
-        var_dump($this->settings);
 
         // var_dump(debug_backtrace());
         // Add the options page and menu item.
@@ -39,6 +38,95 @@ class Settings_Page extends Base
         $realpath        = (string) \realpath(\dirname(__FILE__));
         $plugin_basename = \plugin_basename(\plugin_dir_path($realpath) . CDTP_TEXTDOMAIN . '.php');
         \add_filter('plugin_action_links_' . $plugin_basename, array( $this, 'add_action_links' ));
+
+
+        if (
+            isset($_GET['page']) &&
+            $_GET['page'] == CDTP_TEXTDOMAIN &&
+            $_SERVER['REQUEST_METHOD'] == 'POST'
+        ) {
+            $nonce_context = 'nonce_CMB2phpconvert-docx-to-posts_options';
+            $nonce = $_POST[$nonce_context];
+            $verified = \wp_verify_nonce($nonce, $nonce_context);
+            if (!$verified) {
+                return;
+            }
+            // var_dump($this->settings);
+            $field_key = '_file_docx_id';
+            $field = $this->settings[$field_key];
+            $file_path = \get_attached_file($field);
+            $htmlContent = $this->getHmltContentFromDocx($file_path);
+            $postArr = $this->convertHtmlToPostArr($htmlContent);
+            // var_dump($postArr);
+        }
+    }
+
+    protected function getHmltContentFromDocx(string $filePath): string
+    {
+        $phpWord = \PhpOffice\PhpWord\IOFactory::load($filePath);
+        $htmlWriter = new \PhpOffice\PhpWord\Writer\HTML($phpWord);
+        // $htmlWriter->save('test1doc.html');
+
+        // $class_method = get_class_methods($htmlWriter);
+        // var_dump($class_method);
+        // var_dump($htmlWriter);
+        // return '';
+        return $htmlWriter->getContent();
+    }
+
+    protected function convertHtmlToPostArr(string $html): array
+    {
+        $postArr = [
+            // 0 => [
+            // 	'title' => 'Tiêu đề',
+            // 	'content' => 'Nội dung'
+            // ]
+        ];
+        $has_match = preg_match(
+            '/<body>(.*)<\/body>/is',
+            $html,
+            $matches
+        );
+        if ($has_match != 1) {
+            return '';
+        }
+        // var_dump($matches[1]);
+        $html = $matches[1];
+        // var_dump($html);
+        $postArr = $this->convertHtmlToPost($html, $postArr);
+        return $postArr;
+    }
+
+    protected function convertHtmlToPost(string $html, array $postArr): array
+    {
+        $regex = '/<h1>(.*)<\/h1>/i';
+        $has_match = preg_match(
+            $regex,
+            $html,
+            $matches,
+            PREG_OFFSET_CAPTURE
+        );
+        if (
+            $has_match != 1 ||
+            count($matches) < 2
+            ) {
+            return $postArr;
+        }
+        // var_dump($matches);
+        $tag_title = $matches[0][0];
+        $cut_off_pos = $matches[0][1];
+        $post_title = $matches[1][0];
+        $post_content = substr($html, 0, $cut_off_pos);
+        array_push($postArr, [
+            'title' => $post_title,
+            'content' => $post_content
+        ]);
+        $tag_title_length = strlen($tag_title);
+        $remain_content = substr($html, $cut_off_pos + $tag_title_length);
+        if (!empty($remain_content)) {
+            $postArr =  $this->convertHtmlToPost($remain_content, $postArr);
+        }
+        return $postArr;
     }
 
     /**

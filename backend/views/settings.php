@@ -222,23 +222,23 @@
         //         'options' => array( 'textarea_rows' => 5 ),
         //     )
         // );
-        // $cmb->add_field(
-        //     array(
-        //         'name' => __('Test Image', CDTP_TEXTDOMAIN),
-        //         'desc' => __('Upload an image or enter a URL.', CDTP_TEXTDOMAIN),
-        //         'id'   => '_image',
-        //         'type' => 'file',
-        //     )
-        // );
         $cmb->add_field(
             array(
-                'name'         => __('Multiple Files', CDTP_TEXTDOMAIN),
-                'desc'         => __('Upload or add multiple images/attachments.', CDTP_TEXTDOMAIN),
-                'id'           => '_file_list',
-                'type'         => 'file_list',
-                'preview_size' => array( 100, 100 ), // Default: array( 50, 50 )
+                'name' => __('Upload file docx', CDTP_TEXTDOMAIN),
+                'desc' => __('Upload file docx', CDTP_TEXTDOMAIN),
+                'id'   => '_file_docx',
+                'type' => 'file',
             )
         );
+        // $cmb->add_field(
+        //     array(
+        //         'name'         => __('Multiple Files', CDTP_TEXTDOMAIN),
+        //         'desc'         => __('Upload or add multiple images/attachments.', CDTP_TEXTDOMAIN),
+        //         'id'           => '_file_list',
+        //         'type'         => 'file_list',
+        //         'preview_size' => array( 100, 100 ), // Default: array( 50, 50 )
+        //     )
+        // );
         // $cmb->add_field(
         //     array(
         //         'name' => __('oEmbed', CDTP_TEXTDOMAIN),
