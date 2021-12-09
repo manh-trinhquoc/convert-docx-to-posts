@@ -8,81 +8,80 @@
 ?>
 <div id="tabs-1" class="wrap">
     <?php
-            $cmb = new_cmb2_box(
-    array(
-                    'id'         => CDTP_TEXTDOMAIN . '_options',
-                    'hookup'     => false,
-                    'show_on'    => array( 'key' => 'options-page', 'value' => array( CDTP_TEXTDOMAIN ) ),
-                    'show_names' => true,
-                )
-);
-            $cmb->add_field(
-                array(
-                    'name'    => __('Text', CDTP_TEXTDOMAIN),
-                    'desc'    => __('field description (optional)', CDTP_TEXTDOMAIN),
-                    'id'      => 'text',
-                    'type'    => 'text',
-                    'default' => 'Default Text',
-                )
-            );
-            $cmb->add_field(
-                array(
-                    'name'    => __('Color Picker', CDTP_TEXTDOMAIN),
-                    'desc'    => __('field description (optional)', CDTP_TEXTDOMAIN),
-                    'id'      => 'colorpicker',
-                    'type'    => 'colorpicker',
-                    'default' => '#bada55',
-                )
-            );
-            $cmb->add_field(
-                array(
-                    'name' => __('Test Text Medium', CDTP_TEXTDOMAIN),
-                    'desc' => __('field description (optional)', CDTP_TEXTDOMAIN),
-                    'id'   => '_textmedium',
-                    'type' => 'text_medium',
-                    // 'repeatable' => true,
-                )
-            );
-            $cmb->add_field(
-                array(
-                    'name' => __('Website URL', CDTP_TEXTDOMAIN),
-                    'desc' => __('field description (optional)', CDTP_TEXTDOMAIN),
-                    'id'   => '_url',
-                    'type' => 'text_url',
-                )
-            );
-            $cmb->add_field(
-                array(
-                    'name' => __('Test Text Email', CDTP_TEXTDOMAIN),
-                    'desc' => __('field description (optional)', CDTP_TEXTDOMAIN),
-                    'id'   => '_email',
-                    'type' => 'text_email',
-                )
-            );
-            $cmb->add_field(
-                array(
-                    'name' => __('Test Time', CDTP_TEXTDOMAIN),
-                    'desc' => __('field description (optional)', CDTP_TEXTDOMAIN),
-                    'id'   => '_time',
-                    'type' => 'text_time',
-                )
-            );
-            $cmb->add_field(
-                array(
-                    'name' => __('Test Date Picker', CDTP_TEXTDOMAIN),
-                    'desc' => __('field description (optional)', CDTP_TEXTDOMAIN),
-                    'id'   => '_textdate',
-                    'type' => 'text_date',
-                )
-            );
-            $cmb->add_field(
-                array(
-                    'name' => __('Test Date Picker (UNIX timestamp)', CDTP_TEXTDOMAIN),
-                    'desc' => __('field description (optional)', CDTP_TEXTDOMAIN),
-                    'id'   => '_textdate_timestamp',
-                    'type' => 'text_date_timestamp',
-                )
-            );
+            $cmb = new_cmb2_box(array(
+                'id'         => CDTP_TEXTDOMAIN . '_options',
+                'hookup'     => false,
+                'show_on'    => array( 'key' => 'options-page', 'value' => array( CDTP_TEXTDOMAIN ) ),
+                'show_names' => true,
+            ));
+            // var_dump($cmb);
+            // $cmb->add_field(
+            //     array(
+            //         'name'    => __('Text', CDTP_TEXTDOMAIN),
+            //         'desc'    => __('field description (optional)', CDTP_TEXTDOMAIN),
+            //         'id'      => 'text',
+            //         'type'    => 'text',
+            //         'default' => 'Default Text',
+            //     )
+            // );
+            // $cmb->add_field(
+            //     array(
+            //         'name'    => __('Color Picker', CDTP_TEXTDOMAIN),
+            //         'desc'    => __('field description (optional)', CDTP_TEXTDOMAIN),
+            //         'id'      => 'colorpicker',
+            //         'type'    => 'colorpicker',
+            //         'default' => '#bada55',
+            //     )
+            // );
+            // $cmb->add_field(
+            //     array(
+            //         'name' => __('Test Text Medium', CDTP_TEXTDOMAIN),
+            //         'desc' => __('field description (optional)', CDTP_TEXTDOMAIN),
+            //         'id'   => '_textmedium',
+            //         'type' => 'text_medium',
+            //         // 'repeatable' => true,
+            //     )
+            // );
+            // $cmb->add_field(
+            //     array(
+            //         'name' => __('Website URL', CDTP_TEXTDOMAIN),
+            //         'desc' => __('field description (optional)', CDTP_TEXTDOMAIN),
+            //         'id'   => '_url',
+            //         'type' => 'text_url',
+            //     )
+            // );
+            // $cmb->add_field(
+            //     array(
+            //         'name' => __('Test Text Email', CDTP_TEXTDOMAIN),
+            //         'desc' => __('field description (optional)', CDTP_TEXTDOMAIN),
+            //         'id'   => '_email',
+            //         'type' => 'text_email',
+            //     )
+            // );
+            // $cmb->add_field(
+            //     array(
+            //         'name' => __('Test Time', CDTP_TEXTDOMAIN),
+            //         'desc' => __('field description (optional)', CDTP_TEXTDOMAIN),
+            //         'id'   => '_time',
+            //         'type' => 'text_time',
+            //     )
+            // );
+            // $cmb->add_field(
+            //     array(
+            //         'name' => __('Test Date Picker', CDTP_TEXTDOMAIN),
+            //         'desc' => __('field description (optional)', CDTP_TEXTDOMAIN),
+            //         'id'   => '_textdate',
+            //         'type' => 'text_date',
+            //     )
+            // );
+            // $cmb->add_field(
+            //     array(
+            //         'name' => __('Test Date Picker (UNIX timestamp)', CDTP_TEXTDOMAIN),
+            //         'desc' => __('field description (optional)', CDTP_TEXTDOMAIN),
+            //         'id'   => '_textdate_timestamp',
+            //         'type' => 'text_date_timestamp',
+            //     )
+            // );
             $cmb->add_field(
                 array(
                     'name' => __('Test Date/Time Picker Combo (UNIX timestamp)', CDTP_TEXTDOMAIN),
