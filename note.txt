@@ -1,3 +1,0 @@
-
-
-  php -r "symlink('D:\wamp64\www\convert-docx-to-posts\convert-docx-to-posts', 'D:\wamp64\www\website_smebespoke\web\app\plugins\convert-docx-to-posts');"
